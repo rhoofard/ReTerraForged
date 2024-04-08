@@ -32,11 +32,11 @@ jobs:
         ref: ${{ inputs.release_version }}
 
     - name: gradle build
-      runs:  |
+      run:  |
         ./gradlew build
 
     - name: check artifacts
-      runs: |
+      run: |
         ls -al
 
   #   - name: Create archive
