@@ -1,6 +1,6 @@
 name: Build and Release
 on:
-  workflow_dispatch:
+   workflow_dispatch:
     inputs:
       release_version:
       required: true
