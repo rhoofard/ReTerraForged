@@ -1,11 +1,11 @@
 name: Build and Release
 on:
    workflow_dispatch:
-    inputs:
-      release_version:
-      required: true
-      type: string
-      
+      inputs:
+         release_version:
+            required: true
+            type: string
+         
 
     
 jobs:
