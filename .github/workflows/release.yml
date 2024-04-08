@@ -31,6 +31,11 @@ jobs:
       with:
         ref: ${{ inputs.release_version }}
 
+    - uses: actions/setup-java@v4
+      with:
+         distribution: 'oracle'
+         java-version: '11'
+         
     - name: Make gradlew executable
       run: chmod +x ./gradlew
       
