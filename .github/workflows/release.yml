@@ -1,0 +1,64 @@
+name: Build and Release
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+      required: true
+      type: string
+      
+
+    
+jobs:
+  # create-release:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Create Release
+  #       run: |
+  #         tag=${{ inputs.release_version }}
+  #         body="rhoofard/ReTerraForged@${{ inputs.release_version }}"
+  #         gh release create --draft "$tag" --title "$tag" --notes "$body" --generate-notes
+  #       env:
+  #         GH_TOKEN: ${{ github.token }}
+  #         GH_REPO: ${{ github.repository }}
+  build:
+    # needs: [create-release]
+    runs-on: ubuntu-latest
+    # permissions:
+    #   contents: write  
+    steps:
+    - name: Clone repo
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ inputs.release_version }}
+
+    - name: gradle build
+      runs:  |
+        ./gradlew build
+
+    - name: check artifacts
+      runs: |
+        ls -al
+
+  #   - name: Create archive
+  #     working-directory: ${{matrix.language}}
+  #     run: tar czf docset-${{ matrix.language }}.tar.gz _site
+
+  #   - name: Upload archive
+  #     working-directory: ${{matrix.language}}
+  #     run: gh release upload "${{ needs.prepare.outputs.tag }}" "docset-${{ matrix.language }}.tar.gz"
+  #     env:
+  #       GH_TOKEN: ${{ github.token }}
+
+  # release:
+  #   needs: [build]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Publish Release
+  #     run: gh release edit "${{ inputs.release_version }}" --draft=false
+  #     env:
+  #       GH_TOKEN: ${{ github.token }}
+  #       GH_REPO: ${{ github.repository }}
+
+      
+
+      
