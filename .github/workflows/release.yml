@@ -3,8 +3,9 @@ on:
    workflow_dispatch:
       inputs:
          release_version:
-            required: true
+            required: false
             type: string
+            default: 1.20.2
          
 
     
@@ -34,7 +35,7 @@ jobs:
     - uses: actions/setup-java@v4
       with:
          distribution: 'temurin'
-         java-version: '11'
+         java-version: '17'
          
     - name: Make gradlew executable
       run: chmod +x ./gradlew
