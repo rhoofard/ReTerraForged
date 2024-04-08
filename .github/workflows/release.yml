@@ -31,6 +31,9 @@ jobs:
       with:
         ref: ${{ inputs.release_version }}
 
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew
+      
     - name: gradle build
       run:  |
         ./gradlew build
